@@ -159,6 +159,11 @@ EOF
         echo "DEFAULT_INSTANCE_USER=root" >>exerciserc
     fi
 
+    if [ "$DEVSTACK_GATE_VIRT_DRIVER" == "xenapi" ]; then
+        echo "SKIP_EXERCISES=${SKIP_EXERCISES},volumes" >>localrc
+        # TODO - we don't need the above, but its an example
+    fi
+
     if [ "$DEVSTACK_GATE_TEMPEST" -eq "1" ]; then
         # We need to disable ratelimiting when running
         # Tempest tests since so many requests are executed
